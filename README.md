@@ -10,7 +10,7 @@ Auto-sync a Google Sheet cell to a Bash alias using Python (OAuth2 + gspread).
 [![Maintained](https://img.shields.io/badge/Maintained-Yes-brightgreen.svg)]()
 
 
-# 🔐 Google Sheet → Bash Alias Sync
+#### 🔐 Google Sheet → Bash Alias Sync
 
 This Python utility automatically **reads a specific cell** from a **Google Sheet** and updates your **Bash alias** with that value in your local environment.
 
@@ -19,7 +19,7 @@ No manual edits, no stale values — just one command to pull the latest data fr
 
 ---
 
-## 💡 Why This Project?
+#### 💡 Why This Project?
 
 In many teams or environments, certain credentials, access keys, or environment-specific values frequently change — for example, temporary passwords, access tokens, or API keys.  
   
@@ -37,7 +37,7 @@ So next time you type `ppwd` in your terminal —  💥 boom, it prints the late
 
 ---
 
-## 🧠 Why Use It?
+#### 🧠 Why Use It?
 
 - Centralize frequently changing values (tokens, passwords, URLs)  
 - Sync shared data across teams securely  
@@ -50,19 +50,20 @@ So next time you type `ppwd` in your terminal —  💥 boom, it prints the late
 ---
 
 
-## 🧩 Configuration — `config.ini`
+#### 🧩 Configuration — `config.ini`
 
 Your config file tells the script **what to fetch** and **how to name it**:  
 
 ```ini
 [google]
 sheet_id = <SHEET_ID>
-cell = <CELL_NUMBER>
-token_file = token.json
-client_secret_file = client_secret.json
+cell = <CELL_ID>
+token_file = <TOKEN_FILE.json>
+client_secret_file = <CLIENT_SECRET_FILE.json>
 
 [bash]
-alias_name = ppwd
+alias_name = <ALIAS_NAME>
+
 ```
 
 | Key                  | Description                               |
@@ -74,57 +75,72 @@ alias_name = ppwd
 | `alias_name`         | Bash alias name (e.g., `ppwd`)            |
 
 --- 
-⚙️ Setup & Usage
+#### ⚙️ Setup & Usage
+##### 🧭 How to Generate Google Client ID & Secret
+Follow these steps to create your OAuth 2.0 Client ID and Secret:
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
+2. Click Select a **project → New Project** → give it a name (e.g., Sheet2Alias).
+3. Navigate to **APIs & Services → Credentials**.
+4. Click + **Create Credentials → OAuth client ID**.
+5. Select Desktop App as the Application Type.
+6. Once created, you’ll get your:
+  - Client ID
+  - Client Secret
+7. Copy these values and save it:
+8. Also ensure the `Google Sheets API` is enabled:
+  - Go to **APIs & Services → Library**
+  - Search for **Google Sheets API** and click **Enable**
 
-1️⃣ Clone the Repo
-git clone https://github.com/<your-username>/sheet2alias.git
+##### 1️⃣ Clone the Repo
+>
+```bash
+git clone https://github.com/<your-username>/sheet2alias.git`
 cd sheet2alias
-
-2️⃣ Install Dependencies
+```
+##### 2️⃣ Install Dependencies
+>
+```bash
 pip install gspread google-auth google-auth-oauthlib
-
-3️⃣ Set Environment Variables
+```
+##### 3️⃣ Set Environment Variables
 
 Before running the script, set your Google API credentials:
-
+```bash
 export GOOGLE_CLIENT_ID="your-client-id.apps.googleusercontent.com"
 export GOOGLE_CLIENT_SECRET="your-client-secret"
-
-
+```
 💡 You only need to do this once — consider adding it to your ~/.bashrc or ~/.zshrc.
 
-4️⃣ Configure Your Sheet
+##### 4️⃣ Configure Your Sheet
 
-Edit config.ini with:
+Edit `config.ini` with:
+- Your Google Sheet ID
+- The target cell (like E10)
+- The alias name (like ppwd)
 
-Your Google Sheet ID
-
-The target cell (like E10)
-
-The alias name (like ppwd)
-
-5️⃣ Run the Script
+##### 5️⃣ Run the Script
+```bash
 python3 simple.py
+```
+###### Example Output:
 
+```
+Fetched value from E10: check@2025fresh
+Updated alias `ppwd` in ~/.bashrc
+```
+
+##### 6️⃣ Test It
+```
+source ~/.bashrc
+ppwd
+```
+🎉 It should echo the value fetched from your Google Sheet!
 
 ✅ The script will:
-
 - Authenticate (only once — then reuse token.json)
 - Read the Google Sheet cell
 - Update .bashrc with your alias
 - Reload your bash configuration
-
-Example Output:
-
-Fetched value from E10: check@202fresh1234
-Updated alias `ppwd` in ~/.bashrc
-
-6️⃣ Test It
-source ~/.bashrc
-ppwd
-
-
-🎉 It should echo the value fetched from your Google Sheet!
 
 --- 
 | Use Case                | Example                                         |
@@ -133,9 +149,9 @@ ppwd
 | Dynamic tokens          | Automatically rotate tokens from a shared sheet |
 | Environment versioning  | Keep app versions synced across teams           |
 | Fun reminders           | `alias break='echo ☕ Time for a coffee!'`       |
-
+  
 ---
-🔒 Security Notes
+#### 🔒 Security Notes
 
 - OAuth tokens are cached locally in token.json
 - Temporary client_secret.json is auto-deleted after every run
@@ -148,23 +164,38 @@ ppwd
 | **configparser** | Lightweight configuration handling |
 | **.bashrc**      | Alias persistence                  |
 
+--- 
+#### 🧩 Possible Future Enhancements
+
+- Multiple aliases from a single sheet
+- Scheduled auto-sync
+- Zsh/Fish shell support
+- Colored terminal feedback
 
 ---
 
-🧰 Tech Stack
-🐍 Python 3.12+
-🧾 Google Sheets API v4
-🔐 OAuth2 Authorization
-🖥️ Bash Automation
+#### 🧰 Tech Stack
+- 🐍 Python 3.12+
+- 🧾 Google Sheets API v4
+- 🔐 OAuth2 Authorization
+- 🖥️ Bash Automation
 
-🧑‍💻 Author
-Aswini S
-💼 OneBill Software • ☁️ Dev Automation Enthusiast
-📧 Email Me
-🌐 GitHub Profile
+--- 
+#### 🧑‍💻 Author
 
---
-🌸 Closing Note
+- **Aswini S**
+- 💼 OneBill Software • ☁️ Dev Automation Enthusiast
+- 📧 Email: [aswinisuguna2@gmail.com](mailto:aswinisuguna2@gmail.com)  
+- 🌐 GitHub: [aswini-s](https://github.com/AswiniSankar)
 
-"Automation isn’t about replacing effort — it’s about removing friction."
-Keep your terminal smart, your workflow light, and your focus where it matters. 💫
+---
+
+#### 🌸 Closing Note
+
+>`"Automation isn’t about replacing effort — it’s about removing friction."
+> Keep your terminal smart, your workflow light, and your focus where it matters. 💫`
+
+##### 🌟 Support This Project
+
+If you found this useful, give it a ⭐ on GitHub!
+It helps others discover sheet2alias and keeps the terminal magic alive 🪄
