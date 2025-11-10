@@ -63,6 +63,7 @@ client_secret_file = client_secret.json
 
 [bash]
 alias_name = ppwd
+```
 
 | Key                  | Description                               |
 | -------------------- | ----------------------------------------- |
@@ -149,3 +150,21 @@ ppwd
 
 
 ---
+
+🧰 Tech Stack
+🐍 Python 3.12+
+🧾 Google Sheets API v4
+🔐 OAuth2 Authorization
+🖥️ Bash Automation
+
+🧑‍💻 Author
+Aswini S
+💼 OneBill Software • ☁️ Dev Automation Enthusiast
+📧 Email Me
+🌐 GitHub Profile
+
+--
+🌸 Closing Note
+
+"Automation isn’t about replacing effort — it’s about removing friction."
+Keep your terminal smart, your workflow light, and your focus where it matters. 💫
